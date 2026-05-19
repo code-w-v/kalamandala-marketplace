@@ -48,7 +48,9 @@ const ProductDetail = () => {
 
     fetchProduct();
 
-  }, [id]);
+    // eslint-disable-next-line
+
+  }, []);
 
   // =======================
   // ADD REVIEW
