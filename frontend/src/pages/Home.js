@@ -6,69 +6,56 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 const Home = () => {
 
   const [products, setProducts] = useState([]);
-
   const [search, setSearch] = useState('');
-
   const [category, setCategory] = useState('');
-
   const [loading, setLoading] = useState(true);
-
-  // =======================
-  // FETCH PRODUCTS
-  // =======================
-  const fetchProducts = async () => {
-
-    try {
-
-      setLoading(true);
-
-      const params = {
-        search,
-        category
-      };
-
-      const res = await axios.get(
-        'https://kalamandala-marketplace.onrender.com/api/products',
-        { params }
-      );
-
-      setProducts(
-        Array.isArray(res.data)
-          ? res.data
-          : res.data.products || []
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  };
 
   useEffect(() => {
 
-    fetchProducts();
+    const fetchProducts = async () => {
 
-    // eslint-disable-next-line
+      try {
+
+        setLoading(true);
+
+        const params = {
+          search,
+          category
+        };
+
+        const res = await axios.get(
+          'https://kalamandala-marketplace.onrender.com/api/products',
+          { params }
+        );
+
+        setProducts(
+          Array.isArray(res.data)
+            ? res.data
+            : res.data.products || []
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    };
+
+    fetchProducts();
 
   }, [search, category]);
 
-  // =======================
-  // LOADING
-  // =======================
   if (loading) {
 
     return (
-
       <div className="flex justify-center py-20 text-xl font-semibold">
         Loading products...
       </div>
-
     );
 
   }
@@ -77,7 +64,6 @@ const Home = () => {
 
     <div className="max-w-7xl mx-auto px-4 py-8">
 
-      {/* SEARCH */}
       <div className="mb-10">
 
         <div className="relative max-w-md mx-auto">
@@ -96,7 +82,6 @@ const Home = () => {
 
         </div>
 
-        {/* CATEGORY BUTTONS */}
         <div className="flex flex-wrap justify-center gap-4 mt-6">
 
           <button
@@ -154,7 +139,6 @@ const Home = () => {
 
       </div>
 
-      {/* NO PRODUCTS */}
       {products.length === 0 ? (
 
         <div className="text-center py-20">
@@ -182,7 +166,6 @@ const Home = () => {
 
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 hover:-translate-y-1">
 
-                {/* IMAGE */}
                 <div className="h-64 bg-gray-100 overflow-hidden">
 
                   <img
@@ -197,7 +180,6 @@ const Home = () => {
 
                 </div>
 
-                {/* CONTENT */}
                 <div className="p-5">
 
                   <h2 className="text-lg font-bold text-gray-800 mb-2">
@@ -208,10 +190,9 @@ const Home = () => {
                     {product.description}
                   </p>
 
-                  {/* SELLER */}
                   <p className="text-sm text-gray-500 mb-3">
 
-                    Sold By:{' '}
+                    Sold By{' '}
 
                     <span className="font-semibold text-purple-700">
 
@@ -223,7 +204,6 @@ const Home = () => {
 
                   </p>
 
-                  {/* PRICE */}
                   <div className="flex justify-between items-center">
 
                     <span className="text-xl font-bold text-purple-600">

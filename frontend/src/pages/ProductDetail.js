@@ -10,51 +10,39 @@ const ProductDetail = () => {
   const { addToCart } = useCart();
 
   const [product, setProduct] = useState(null);
-
   const [loading, setLoading] = useState(true);
-
   const [rating, setRating] = useState(5);
-
   const [comment, setComment] = useState('');
-
   const [message, setMessage] = useState('');
-
-  // =======================
-  // FETCH PRODUCT
-  // =======================
-  const fetchProduct = async () => {
-
-    try {
-
-      const res = await axios.get(
-        `https://kalamandala-marketplace.onrender.com/api/products/${id}`
-      );
-
-      setProduct(res.data);
-
-    } catch (error) {
-
-      console.error(error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  };
 
   useEffect(() => {
 
+    const fetchProduct = async () => {
+
+      try {
+
+        const res = await axios.get(
+          `https://kalamandala-marketplace.onrender.com/api/products/${id}`
+        );
+
+        setProduct(res.data);
+
+      } catch (error) {
+
+        console.error(error);
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    };
+
     fetchProduct();
 
-    // eslint-disable-next-line
+  }, [id]);
 
-  }, []);
-
-  // =======================
-  // ADD REVIEW
-  // =======================
   const handleReviewSubmit = async (e) => {
 
     e.preventDefault();
@@ -77,10 +65,13 @@ const ProductDetail = () => {
       );
 
       setMessage('✅ Review Added');
-
       setComment('');
 
-      fetchProduct();
+      const res = await axios.get(
+        `https://kalamandala-marketplace.onrender.com/api/products/${id}`
+      );
+
+      setProduct(res.data);
 
     } catch (error) {
 
@@ -116,10 +107,8 @@ const ProductDetail = () => {
 
     <div className="max-w-6xl mx-auto p-6">
 
-      {/* PRODUCT */}
       <div className="grid md:grid-cols-2 gap-10">
 
-        {/* IMAGE */}
         <div>
 
           <img
@@ -134,7 +123,6 @@ const ProductDetail = () => {
 
         </div>
 
-        {/* DETAILS */}
         <div>
 
           <h1 className="text-4xl font-bold mb-4">
@@ -174,7 +162,6 @@ const ProductDetail = () => {
 
       </div>
 
-      {/* REVIEW FORM */}
       <div className="mt-14 bg-white shadow-lg rounded-2xl p-8">
 
         <h2 className="text-3xl font-bold mb-6 text-purple-700">
@@ -192,25 +179,11 @@ const ProductDetail = () => {
             className="w-full border p-3 rounded-lg"
           >
 
-            <option value="5">
-              ⭐⭐⭐⭐⭐ (5)
-            </option>
-
-            <option value="4">
-              ⭐⭐⭐⭐ (4)
-            </option>
-
-            <option value="3">
-              ⭐⭐⭐ (3)
-            </option>
-
-            <option value="2">
-              ⭐⭐ (2)
-            </option>
-
-            <option value="1">
-              ⭐ (1)
-            </option>
+            <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+            <option value="4">⭐⭐⭐⭐ (4)</option>
+            <option value="3">⭐⭐⭐ (3)</option>
+            <option value="2">⭐⭐ (2)</option>
+            <option value="1">⭐ (1)</option>
 
           </select>
 
@@ -240,7 +213,6 @@ const ProductDetail = () => {
 
       </div>
 
-      {/* REVIEWS */}
       <div className="mt-14">
 
         <h2 className="text-3xl font-bold mb-6 text-purple-700">
