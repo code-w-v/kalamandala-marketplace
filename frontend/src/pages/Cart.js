@@ -41,7 +41,7 @@ const Cart = () => {
       }));
 
       await axios.post(
-        'http://localhost:5000/api/orders',
+        'https://kalamandala-marketplace.onrender.com/api/orders',
         {
           items,
           totalAmount: total,

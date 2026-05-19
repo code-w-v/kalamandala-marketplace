@@ -225,7 +225,7 @@ const SellerDashboard = () => {
       const token = localStorage.getItem('token');
 
       await axios.delete(
-        `http://localhost:5000/api/products/${id}`,
+        `https://kalamandala-marketplace.onrender.com/api/products/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`

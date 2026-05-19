@@ -19,7 +19,7 @@ const OrderHistory = () => {
       const token = localStorage.getItem('token');
 
       const res = await axios.get(
-        'http://localhost:5000/api/orders',
+        'https://kalamandala-marketplace.onrender.com/api/orders',
         {
           headers: {
             Authorization: `Bearer ${token}`

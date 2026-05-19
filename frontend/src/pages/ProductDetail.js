@@ -59,7 +59,7 @@ const ProductDetail = () => {
       const token = localStorage.getItem('token');
 
       await axios.post(
-        `http://localhost:5000/api/products/${id}/review`,
+        `https://kalamandala-marketplace.onrender.com/api/products/${id}/review`,
         {
           rating,
           comment
