@@ -20,6 +20,8 @@ const Home = () => {
 
     fetchProducts();
 
+    // eslint-disable-next-line
+
   }, [search, category]);
 
   const fetchProducts = async () => {

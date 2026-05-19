@@ -19,18 +19,15 @@ const ProductDetail = () => {
 
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-
-    fetchProduct();
-
-  }, []);
-
+  // =======================
+  // FETCH PRODUCT
+  // =======================
   const fetchProduct = async () => {
 
     try {
 
       const res = await axios.get(
-        `http://localhost:5000/api/products/${id}`
+        `https://kalamandala-marketplace.onrender.com/api/products/${id}`
       );
 
       setProduct(res.data);
@@ -46,6 +43,12 @@ const ProductDetail = () => {
     }
 
   };
+
+  useEffect(() => {
+
+    fetchProduct();
+
+  }, [id]);
 
   // =======================
   // ADD REVIEW
@@ -118,7 +121,11 @@ const ProductDetail = () => {
         <div>
 
           <img
-            src={product.images?.[0]}
+            src={
+              product.images?.[0]
+                ? product.images[0]
+                : 'https://via.placeholder.com/500'
+            }
             alt={product.title}
             className="w-full h-[450px] object-cover rounded-2xl shadow-lg"
           />
@@ -151,7 +158,7 @@ const ProductDetail = () => {
             <span className="font-semibold">
               Seller:
             </span>{' '}
-            {product.seller?.name}
+            {product.seller?.name || 'KalaMandala Seller'}
           </p>
 
           <button
